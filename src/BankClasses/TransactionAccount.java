@@ -8,8 +8,10 @@ public class TransactionAccount extends BankAccount {
     }
 
     public void calculateInterest() {
-        System.out.println("This account is not have interest");
+
+        System.out.println("This account is not have interest\n");
     }
+
 
     @Override
     public void withdraw(double amount) {
