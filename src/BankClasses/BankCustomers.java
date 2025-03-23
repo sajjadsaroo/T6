@@ -3,7 +3,7 @@ package BankClasses;
 import java.util.*;
 
 public class BankCustomers {
-    private ArrayList<BankAccount> accountsList;
+    private ArrayList<BankAccount> accountsList = new ArrayList<BankAccount>();
 
     public void addAccount(BankAccount account) {
         accountsList.add(account);
