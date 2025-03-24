@@ -9,9 +9,9 @@ public class SavingAccount extends BankAccount {
 
     @Override
     public void calculateInterest(){
-        double temp = this.interestRate * super.balance;
-        super.deposit(this.interestRate * super.balance);
-        System.out.println("Saving account interest added: " + temp);
+        double interestAmount = this.interestRate * super.getBalance();
+        super.deposit(interestAmount);
+        System.out.println("Saving account interest added: " + interestAmount);
     }
 
 }
