@@ -35,26 +35,30 @@ public abstract class BankAccount {
 
     public abstract void calculateInterest();
 
-    public void deposit(double amount){
-        if(amount > 0){
-            balance += amount;
-            System.out.println("Deposited " + amount + " " + getAccountNumber());
-        } else {
+    public void deposit(double amount) {
+        if (amount <= 0) {
             System.out.println("this amount is not valid!");
+            return;
         }
+
+        balance += amount;
+        System.out.println("Deposited " + amount + " to Account: " + getAccountNumber());
+
     }
 
-    public void withdraw(double amount){
-        if(amount > 0){
-            if(amount <= balance){
-                balance -= amount;
-                System.out.println("Withdrawn " + amount + " " + getAccountNumber());
-            } else {
-                System.out.println("Insufficient funds!");
-            }
-        } else {
-            System.out.println("this amount is not valid!");
+    public void withdraw(double amount) {
+        if (amount <= 0) {
+            System.out.println("Invalid withdrawal amount.");
+            return;
         }
+
+        if (amount > getBalance()) {
+            System.out.println("Insufficient funds for withdrawal.");
+            return;
+        }
+
+        setBalance(getBalance() - amount);
+        System.out.println("Successfully withdrawn: " + amount + " from account: " + getAccountNumber());
     }
 
 }
