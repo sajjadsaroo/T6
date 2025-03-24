@@ -24,40 +24,58 @@ public class Main {
         bankCustomers.addAccount(sa_3);
 
         System.out.println(YELLOW + "Start Search test : \n" + RESET);
-        System.out.println(bankCustomers.findAccount("6219").getBalance());
-        bankCustomers.findAccount("6218");
+        BankAccount foundAccount = bankCustomers.findAccount("6219");
+        if (foundAccount != null)
+            System.out.println("Balance of found account: " + foundAccount.getBalance());
+
+
+        BankAccount foundAccount2 = bankCustomers.findAccount("6218"); // Non-existent account
+        if (foundAccount2 != null)
+            System.out.println("Balance of found account: " + foundAccount2.getBalance());
+
+
         System.out.println(YELLOW + "\nEnd Search test \n" + RESET);
 
         System.out.println(YELLOW + "Start deposit balance test : \n" + RESET);
-        System.out.println(ta_1.getBalance());
+
+        System.out.println("Initial Balance: " + ta_1.getBalance());
         ta_1.deposit(1000);
-        System.out.println(ta_1.getBalance());
-        sa_2.deposit(-500);
+        System.out.println("After Deposit: " + ta_1.getBalance());
+        sa_2.deposit(-500); // Invalid deposit
+
         System.out.println(YELLOW + "\nEnd deposit balance test \n" + RESET);
 
+
         System.out.println(YELLOW + "Start Interest test : \n" + RESET);
-        ta_3.calculateInterest();
-        sa_3.calculateInterest();
-        System.out.println(ta_3.getBalance());
-        System.out.println(sa_3.getBalance());
+
+        ta_3.calculateInterest(); // Should print "no interest"
+        sa_3.calculateInterest(); // Should add 3% interest
+        System.out.println("Transaction Account Balance: " + ta_3.getBalance());
+        System.out.println("Saving Account Balance: " + sa_3.getBalance());
         System.out.println(YELLOW + "\nEnd Interest test \n" + RESET);
 
         System.out.println(YELLOW + "Start deposit test : \n " + RESET);
 
         ta_1.deposit(500);
-        ta_2.deposit(-100000);
-        ta_1.deposit(100000);
+        ta_2.deposit(-100000); // Invalid deposit
 
         sa_1.deposit(500);
-        sa_2.deposit(-100000);
-        sa_1.deposit(100000);
+        sa_2.deposit(-100000); // Invalid deposit
 
         System.out.println(YELLOW + "\nEnd deposit test \n" + RESET);
+
+        System.out.println(YELLOW + "Start withdrawal test : \n " + RESET);
+
+        ta_1.withdraw(300); // Valid withdrawal
+        ta_2.withdraw(2000); // Should check overdraft limit
+        ta_3.withdraw(-100); // Invalid amount
+        sa_1.withdraw(400); // Valid withdrawal
+        sa_2.withdraw(1500); // Should fail (insufficient balance)
+
+        System.out.println(YELLOW + "\nEnd withdrawal test \n" + RESET);
 
         System.out.println(YELLOW + "Start show all customers test : \n" + RESET);
         bankCustomers.showAllBalances();
         System.out.println(YELLOW + "\nEnd show all customers test \n" + RESET);
-
-
     }
 }
